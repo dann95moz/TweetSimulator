@@ -1,0 +1,16 @@
+.header{
+ 
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(21,32,43);
+    z-index: 1;
+    gap:1rem;
+    img{
+        width: 70px;
+    }
+    h1{
+        color:white
+    }
+}
