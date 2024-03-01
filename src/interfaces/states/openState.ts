@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { SetIsOpen } from "./setters/setIsOpen";
 
-export interface OpenState{
+export interface OpenState {
     isOpen: boolean,
-    setIsOpen: Dispatch<SetStateAction<boolean>>
+    setIsOpen: SetIsOpen
 }

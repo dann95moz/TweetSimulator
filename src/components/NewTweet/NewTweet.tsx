@@ -1,7 +1,6 @@
-import { Alert, AlertColor, Button, DialogActions, DialogContent, DialogTitle, Fab, IconButton, Snackbar, Typography } from '@mui/material'
-import { Add, Close } from '@mui/icons-material'
+import { Alert, AlertColor, Button, DialogActions, DialogContent, DialogTitle, IconButton, Snackbar } from '@mui/material'
+import { Close } from '@mui/icons-material'
 
-import styles from './NewTweet.module.scss'
 import { TWEETS_STORAGE_KEY } from '../../consts/consts'
 import TweetDialog from '../TweetDialog/TweetDialog'
 import { useEffect, useState } from 'react'
@@ -9,12 +8,13 @@ import { useLocalStorage } from '../../Hooks/useLocalStorage'
 import TweetForm from '../TweetForm/TweetForm'
 import { useTweet } from '../../Hooks/useTweetForm'
 import TweetlList from '../TweetList/TweetlList'
+import NewTweetBtn from '../NewTweetBtn/NewTweetBtn'
 
 
 
 
 const NewTweet = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isToastOpened, setIsToastOpened] = useState(false);
     const [tweetsList, setTweetsList] = useLocalStorage(TWEETS_STORAGE_KEY, [])
     const [toastProps, setToastProps] = useState<{severity: AlertColor; message:string }>({ severity: 'error', message:'' });
@@ -51,11 +51,9 @@ const NewTweet = () => {
     );
 
     return (
-        <div className={styles.btn}>
+        <div >
          <TweetlList tweets={tweetsList}/>
-            <Fab className={styles.btn__openModal} onClick={() => setIsOpen(true)} color='primary' aria-label='add new tweet'>
-                <Add/>
-            </Fab>
+<NewTweetBtn setIsOpen={setIsOpen}/>
 <TweetDialog
 
 isOpen={isOpen}
