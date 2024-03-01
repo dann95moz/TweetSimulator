@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { useLocalStorage } from '../../Hooks/useLocalStorage'
 import TweetForm from '../TweetForm/TweetForm'
 import { useTweet } from '../../Hooks/useTweetForm'
+import TweetlList from '../TweetList/TweetlList'
 
 
 
@@ -51,7 +52,7 @@ const NewTweet = () => {
 
     return (
         <div className={styles.btn}>
-         {tweetsList.map((tweet, index) => tweet && <Typography component={'h3'} key={index} color={'white'}>{tweet.name}</Typography>)}
+         <TweetlList tweets={tweetsList}/>
             <Fab className={styles.btn__openModal} onClick={() => setIsOpen(true)} color='primary' aria-label='add new tweet'>
                 <Add/>
             </Fab>
