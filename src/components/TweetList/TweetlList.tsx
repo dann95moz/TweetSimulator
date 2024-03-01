@@ -21,7 +21,7 @@ const TweetList = ({ tweets, setTweetsList }: TweetListProps) => {
       {tweets.map(
         (tweet, index) =>
           tweet && (
-            <Grid item md={3} sm={6} xs={6} key={index}>
+            <Grid item md={3} sm={6} xs={12} key={index}>
               <Card >
                 <CardContent
                  sx={{
