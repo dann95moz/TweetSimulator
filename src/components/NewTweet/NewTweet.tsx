@@ -1,6 +1,4 @@
-import { Alert, AlertColor, Button, DialogActions, DialogContent, DialogTitle, IconButton, Snackbar } from '@mui/material'
-import { Close } from '@mui/icons-material'
-
+import { Alert, AlertColor, Button, DialogActions, DialogContent, DialogTitle, Snackbar } from '@mui/material'
 import { TWEETS_STORAGE_KEY } from '../../consts/consts'
 import TweetDialog from '../TweetDialog/TweetDialog'
 import { useEffect, useState } from 'react'
@@ -9,6 +7,8 @@ import TweetForm from '../TweetForm/TweetForm'
 import { useTweet } from '../../Hooks/useTweetForm'
 import TweetlList from '../TweetList/TweetlList'
 import NewTweetBtn from '../NewTweetBtn/NewTweetBtn'
+import TweetSnackBar from '../TweetSnackBar/TweetSnackBar'
+import CloseBtn from '../atoms/CloseBtn/CloseBtn'
 
 
 
@@ -39,16 +39,7 @@ const NewTweet = () => {
         setIsToastOpened(false);
     }
 
-    const action = (
-        <IconButton
-            size="small"
-            aria-label="close toast"
-            color="inherit"
-            onClick={handleCloseToast}
-        >
-            <Close fontSize="small" />
-        </IconButton>
-    );
+
 
     return (
         <div >
@@ -70,13 +61,18 @@ setIsOpen={setIsOpen}
         </DialogActions>
     </form>
 </TweetDialog>
+<TweetSnackBar
+    open={isToastOpened}
+    onClose={handleCloseToast}
+    severity={toastProps.severity}
+/>
             <Snackbar
                 anchorOrigin={{vertical:'top',horizontal:'right'}}
                 open={isToastOpened}
                 autoHideDuration={3000}
                 onClose={handleCloseToast}
                 message={toastProps.message}
-                action={action}
+                action={<CloseBtn onClick={handleCloseToast}/>}
             >
                 <Alert onClose={handleCloseToast} severity={toastProps.severity} variant="filled" sx={{ width: '100%' }}>
                     {toastProps.message}
