@@ -2,7 +2,6 @@ import { useState } from "react";
 import { TweetItem } from "../interfaces/tweetItem";
 
 export const useLocalStorage = (key: string, initialValue: TweetItem[]): [TweetItem[], (value: TweetItem[] | ((prevTweets: TweetItem[]) => TweetItem[])) => void] => {
-    console.log('trigger');
     
     const [storedValue, setStoredValue] = useState(() => {
         try {
