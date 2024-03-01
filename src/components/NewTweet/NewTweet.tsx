@@ -1,21 +1,21 @@
-import { Alert, AlertColor, Fab, IconButton, Snackbar, Typography } from '@mui/material'
+import { Alert, AlertColor, Button, DialogActions, DialogContent, DialogTitle, Fab, IconButton, Snackbar, Typography } from '@mui/material'
 import { Add, Close } from '@mui/icons-material'
 
 import styles from './NewTweet.module.scss'
-import { TweetItem } from '../../interfaces/tweetItem'
 import { TWEETS_STORAGE_KEY } from '../../consts/consts'
 import TweetDialog from '../TweetDialog/TweetDialog'
 import { useEffect, useState } from 'react'
 import { useLocalStorage } from '../../Hooks/useLocalStorage'
+import TweetForm from '../TweetForm/TweetForm'
+import { useTweet } from '../../Hooks/useTweetForm'
 
 
 
 
 const NewTweet = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isToastOpened, setisToastOpened] = useState(false);
+    const [isToastOpened, setIsToastOpened] = useState(false);
     const [tweetsList, setTweetsList] = useLocalStorage(TWEETS_STORAGE_KEY, [])
-    const [tweet, setTweet] = useState<TweetItem>({ name:'', tweet:'' });
     const [toastProps, setToastProps] = useState<{severity: AlertColor; message:string }>({ severity: 'error', message:'' });
 
     useEffect(() => {
@@ -30,11 +30,12 @@ const NewTweet = () => {
     }, [tweetsList]);
 
   
+    const {  handleSubmit, handleInvalid, handleChange } = useTweet({ setIsOpen, setTweetsList, setToastProps, setIsToastOpened });
 
 
 
     const handleCloseToast = () => {
-        setisToastOpened(false);
+        setIsToastOpened(false);
     }
 
     const action = (
@@ -55,14 +56,21 @@ const NewTweet = () => {
                 <Add/>
             </Fab>
 <TweetDialog
-tweet={tweet}
+
 isOpen={isOpen}
 setIsOpen={setIsOpen}
-setTweet={setTweet}
-setIsToastOpened={setisToastOpened}
-setTweetsList={setTweetsList}
-setToastProps={setToastProps}
-/>
+
+>
+<form onSubmit={handleSubmit} onInvalid={handleInvalid}>
+        <DialogTitle component={'h2'}>Enviar Tweet</DialogTitle>
+        <DialogContent>
+            <TweetForm handleChange={handleChange} />
+        </DialogContent>
+        <DialogActions>
+            <Button type='submit'>Agregar tweet</Button>
+        </DialogActions>
+    </form>
+</TweetDialog>
             <Snackbar
                 anchorOrigin={{vertical:'top',horizontal:'right'}}
                 open={isToastOpened}
