@@ -3,7 +3,7 @@ import TweetDialog from '../../components/TweetDialog/TweetDialog'
 import {  useState } from 'react'
 import TweetForm from '../../components/TweetForm/TweetForm'
 import { useTweet } from '../../Hooks/useTweetForm'
-import TweetlList from '../../components/TweetList/TweetlList'
+import TweetList from '../../components/TweetList/TweetlList'
 import NewTweetBtn from '../../components/NewTweetBtn/NewTweetBtn'
 import TweetSnackBar from '../../components/TweetSnackBar/TweetSnackBar'
 import { useTweets } from '../../Hooks/useTweets'
@@ -24,7 +24,7 @@ const NewTweet = () => {
 
     return (
         <div >
-         <TweetlList tweets={tweetsList}/>
+         <TweetList tweets={tweetsList}  setTweetsList={ setTweetsList}/>
 <NewTweetBtn
 setIsOpen={setIsOpen}/>
 <TweetDialog
